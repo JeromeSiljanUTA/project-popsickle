@@ -3,24 +3,8 @@ This module cleans the data and puts it in an sqlite3 database
 """
 
 import datetime as dt
-import sqlite3
 
 import pandas as pd
-
-cmd = """
-CREATE TABLE IF NOT EXISTS power_draw(
-    "Hour_Ending" TEXT,
-    "COAST" TEXT,
-    "EAST" TEXT,
-    "FWEST" TEXT,
-    "NORTH" TEXT,
-    "NCENT" TEXT,
-    "SOUTH" TEXT,
-    "SCENT" TEXT,
-    "WEST" TEXT,
-    "ERCOT" TEXT,
-    PRIMARY KEY(Hour_Ending))
-"""
 
 
 def back_str_hour(date_str):
@@ -50,9 +34,3 @@ def import_files():
             df = pd.concat([df, tmp_df])
 
     return df.reset_index().drop(columns=["index"])
-
-
-with sqlite3.connect("data/main.db") as conn:
-    c = conn.cursor()
-    c.execute(cmd)
-    conn.commit()
