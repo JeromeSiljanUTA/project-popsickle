@@ -15,11 +15,12 @@ CREATE TABLE IF NOT EXISTS power_draw(
     "SOUTH" TEXT,
     "SCENT" TEXT,
     "WEST" TEXT,
-    "ERCOT" TEXT,
+    "ERCOT" TEXT
+)
 """
 INSERT_INTO = """
 INSERT INTO power_draw(
-    Hour_Ending,
+    "Hour Ending",
     COAST,
     EAST,
     FWEST,
@@ -33,7 +34,7 @@ INSERT INTO power_draw(
 """
 
 
-def insert_data():
+def insert_data(df):
     """
     Adds Excel data to SQLite3 database,
     creates table if one does not already exist
@@ -41,4 +42,12 @@ def insert_data():
     with sqlite3.connect("data/02_intermediate/main.db") as conn:
         cursor = conn.cursor()
         cursor.execute(CREATE_TABLE)
+        for row in df.iterrows():
+            row = row[1]
+            cursor.execute(
+                f"""
+                {INSERT_INTO}"{row[0]}", "{row[1]}", "{row[2]}", "{row[3]}", "{row[4]}", "{row[5]}", "{row[6]}", "{row[7]}", "{row[8]}", "{row[9]}")
+                """
+            )
+
         conn.commit()
