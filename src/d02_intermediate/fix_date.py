@@ -8,6 +8,15 @@ import pandas as pd
 
 
 def back_str_hour(date_str):
+    """
+    Takes a date string and subtracts one hour
+    Args:
+        date_str: date in string format to be manipulated
+
+    Returns:
+        string of date one hour previous
+
+    """
     try:
         # don't go to end of string to cut out DST
         return (
@@ -19,18 +28,17 @@ def back_str_hour(date_str):
 
 
 def clean_df(df):
+    """
+    Formats column as datetime by subtracting one
+    hour as a string, converting to datetime, and
+    adding an hour. This is done to change the 01:24
+    hour format to 00:23
+
+    Returns:
+        DataFrame with the "Hour Ending" column as
+        datetime.
+
+    """
     df["Hour Ending"] = df["Hour Ending"].apply(back_str_hour)
     df["Hour Ending"] = pd.to_datetime(df["Hour Ending"]) + dt.timedelta(hours=1)
     return df
-
-
-def import_files():
-    for idx, file_name in enumerate(file_list):
-        file_name = f"data/01_raw/{file_name}"
-        if idx == 0:
-            df = clean_df(pd.read_excel(file_name).rename(columns=rename_dict))
-        else:
-            tmp_df = clean_df(pd.read_excel(file_name).rename(columns=rename_dict))
-            df = pd.concat([df, tmp_df])
-
-    return df.reset_index().drop(columns=["index"])

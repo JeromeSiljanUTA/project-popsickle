@@ -1,8 +1,12 @@
+"""
+Moves intermediate DataFrame into SQLite3 database
+"""
+
 import sqlite3
 
-cmd = """
+CREATE_TABLE = """
 CREATE TABLE IF NOT EXISTS power_draw(
-    "Hour_Ending" TEXT,
+    "Hour Ending" TEXT,
     "COAST" TEXT,
     "EAST" TEXT,
     "FWEST" TEXT,
@@ -12,12 +16,29 @@ CREATE TABLE IF NOT EXISTS power_draw(
     "SCENT" TEXT,
     "WEST" TEXT,
     "ERCOT" TEXT,
-    PRIMARY KEY(Hour_Ending))
+"""
+INSERT_INTO = """
+INSERT INTO power_draw(
+    Hour_Ending,
+    COAST,
+    EAST,
+    FWEST,
+    NORTH,
+    NCENT,
+    SOUTH,
+    SCENT,
+    WEST,
+    ERCOT) 
+    VALUES(
 """
 
 
 def insert_data():
+    """
+    Adds Excel data to SQLite3 database,
+    creates table if one does not already exist
+    """
     with sqlite3.connect("data/02_intermediate/main.db") as conn:
-        c = conn.cursor()
-        c.execute(cmd)
+        cursor = conn.cursor()
+        cursor.execute(CREATE_TABLE)
         conn.commit()

@@ -1,5 +1,8 @@
+"""
+Loads data from CSV into DataFrame
+"""
 import pandas as pd
-from d02_intermediate.fix_date import back_str_hour, clean_df, import_files
+from d02_intermediate.fix_date import clean_df
 
 rename_dict = {
     "HourEnding": "Hour Ending",
@@ -35,6 +38,14 @@ file_list = [
 
 
 def import_files():
+    """
+    Reads list of Excel files, renames column headers,
+    and adds to DataFrame
+
+    Returns:
+        DataFrame with Excel data
+
+    """
     for idx, file_name in enumerate(file_list):
         file_name = f"data/01_raw/{file_name}"
         if idx == 0:
