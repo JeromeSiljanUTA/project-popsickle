@@ -40,5 +40,7 @@ def clean_df(df):
 
     """
     df["Hour Ending"] = df["Hour Ending"].apply(back_str_hour)
-    df["Hour Ending"] = pd.to_datetime(df["Hour Ending"]) + dt.timedelta(hours=1)
+    df["Hour Ending"] = pd.to_datetime(df["Hour Ending"]).dt.round("H") + dt.timedelta(
+        hours=1
+    )
     return df
