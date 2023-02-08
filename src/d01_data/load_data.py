@@ -1,6 +1,8 @@
 """
 Loads data from CSV into DataFrame
 """
+import sqlite3
+
 import pandas as pd
 from d02_intermediate.fix_date import clean_df
 
@@ -55,3 +57,15 @@ def import_files():
             df = pd.concat([df, tmp_df])
 
     return df.reset_index().drop(columns=["index"])
+
+
+def load_from_db():
+    """
+    Queries SQLite3 database and populates DataFrame
+    Returns:
+    DataFrame from SQLite3 database
+
+    """
+    with sqlite3.connect("data/02_intermediate/main.db") as conn:
+        df = pd.read_sql("SELECT * FROM power_draw", conn)
+        return df
