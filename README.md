@@ -3,6 +3,7 @@
 ## ERCOT Regions
 
 ![ERCOT Weather Map](references/ERCOT-Maps_Weather.jpg)
+[Link](https://www.ercot.com/files/assets/2022/12/13/ERCOT-Maps_Weather.jpg?)
 
 ### Key Cities in Each Region
 1. North
@@ -26,5 +27,3 @@
     - Tyler
 8. Coast
     - Houston
-
-[Link](https://www.ercot.com/files/assets/2022/12/13/ERCOT-Maps_Weather.jpg?)
