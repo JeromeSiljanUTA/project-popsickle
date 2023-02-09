@@ -4,7 +4,7 @@ Moves intermediate DataFrame into SQLite3 database
 
 import sqlite3
 
-CREATE_TABLE = """
+CREATE_POWER_DRAW_TABLE = """
 CREATE TABLE IF NOT EXISTS power_draw(
     "Hour Ending" TEXT,
     "COAST" TEXT,
@@ -18,7 +18,15 @@ CREATE TABLE IF NOT EXISTS power_draw(
     "ERCOT" TEXT
 )
 """
-INSERT_INTO = """
+CREATE_WEATHER_TABLE = """
+CREATE TABLE IF NOT EXISTS weather(
+    "Time" TEXT,
+    "Tempterature" REAL,
+    "Region" TEXT,
+    "City" TEXT
+)
+"""
+INSERT_INTO_POWER_DRAW = """
 INSERT INTO power_draw(
     "Hour Ending",
     COAST,
@@ -32,22 +40,43 @@ INSERT INTO power_draw(
     ERCOT) 
     VALUES(
 """
+INSERT_INTO_WEATHER = """
+INSERT INTO weather(
+    Time,
+    Tempterature,
+    Region,
+    City)
+    VALUES(
+"""
 
 
-def insert_data(df):
+def insert_power_data(df):
     """
     Adds Excel data to SQLite3 database,
     creates table if one does not already exist
     """
     with sqlite3.connect("data/02_intermediate/main.db") as conn:
         cursor = conn.cursor()
-        cursor.execute(CREATE_TABLE)
+        cursor.execute(CREATE_WEATHER_TABLE)
         for row in df.iterrows():
             row = row[1]
             cursor.execute(
                 f"""
-                {INSERT_INTO}"{row[0]}", "{row[1]}", "{row[2]}", "{row[3]}", "{row[4]}", "{row[5]}", "{row[6]}", "{row[7]}", "{row[8]}", "{row[9]}")
+                {INSERT_INTO_POWER_DRAW}"{row[0]}", "{row[1]}", "{row[2]}", "{row[3]}", "{row[4]}", "{row[5]}", "{row[6]}", "{row[7]}", "{row[8]}", "{row[9]}")
                 """
             )
+        conn.commit()
 
+
+def insert_weather_data(df):
+    with sqlite3.connect("data/02_intermediate/main.db") as conn:
+        cursor = conn.cursor()
+        cursor.execute(CREATE_WEATHER_TABLE)
+        for row in df.iterrows():
+            row = row[1]
+            cursor.execute(
+                f"""
+                {INSERT_INTO_WEATHER}"{row[0]}", "{row[1]}", "{row[2]}", "{row[3]}")
+                """
+            )
         conn.commit()

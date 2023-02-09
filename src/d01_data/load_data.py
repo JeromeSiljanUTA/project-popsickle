@@ -2,6 +2,7 @@
 Loads data from CSV into DataFrame
 """
 import sqlite3
+from enum import Enum
 
 import pandas as pd
 from d02_intermediate.fix_date import clean_df
@@ -59,7 +60,7 @@ def import_files():
     return df.reset_index().drop(columns=["index"])
 
 
-def load_from_db():
+def load_from_db(TABLE):
     """
     Queries SQLite3 database and populates DataFrame
     Returns:
@@ -67,5 +68,8 @@ def load_from_db():
 
     """
     with sqlite3.connect("data/02_intermediate/main.db") as conn:
-        df = pd.read_sql("SELECT * FROM power_draw", conn)
+        if TABLE == 1:
+            df = pd.read_sql("SELECT * FROM power_draw", conn)
+        else:
+            df = pd.read_sql("SELECT * FROM weather", conn)
         return df
