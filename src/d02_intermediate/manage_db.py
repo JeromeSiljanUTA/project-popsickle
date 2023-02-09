@@ -43,7 +43,7 @@ INSERT INTO power_draw(
 INSERT_INTO_WEATHER = """
 INSERT INTO weather(
     Time,
-    Tempterature,
+    Temperature,
     Region,
     City)
     VALUES(
