@@ -55,6 +55,8 @@ def insert_power_data(df):
     Adds Excel data to SQLite3 database,
     creates table if one does not already exist
     """
+    if os.path.isdir("data/02_intermediate"):
+        os.mkdir("data/02_intermediate")
     with sqlite3.connect("data/02_intermediate/main.db") as conn:
         cursor = conn.cursor()
         cursor.execute(CREATE_WEATHER_TABLE)
@@ -69,6 +71,8 @@ def insert_power_data(df):
 
 
 def insert_weather_data(df):
+    if os.path.isdir("data/02_intermediate"):
+        os.mkdir("data/02_intermediate")
     with sqlite3.connect("data/02_intermediate/main.db") as conn:
         cursor = conn.cursor()
         cursor.execute(CREATE_WEATHER_TABLE)
