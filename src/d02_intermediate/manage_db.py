@@ -3,6 +3,7 @@ Moves intermediate DataFrame into SQLite3 database
 """
 
 import sqlite3
+import os
 
 CREATE_POWER_DRAW_TABLE = """
 CREATE TABLE IF NOT EXISTS power_draw(
@@ -55,7 +56,7 @@ def insert_power_data(df):
     Adds Excel data to SQLite3 database,
     creates table if one does not already exist
     """
-    if os.path.isdir("data/02_intermediate"):
+    if not os.path.isdir("data/02_intermediate"):
         os.mkdir("data/02_intermediate")
     with sqlite3.connect("data/02_intermediate/main.db") as conn:
         cursor = conn.cursor()
@@ -71,7 +72,7 @@ def insert_power_data(df):
 
 
 def insert_weather_data(df):
-    if os.path.isdir("data/02_intermediate"):
+    if not os.path.isdir("data/02_intermediate"):
         os.mkdir("data/02_intermediate")
     with sqlite3.connect("data/02_intermediate/main.db") as conn:
         cursor = conn.cursor()
