@@ -4,7 +4,7 @@ This module calls other modules to clean and display our data and predictions
 from d01_data.get_weather import get_weather_city
 from d01_data.load_data import import_files, load_from_db
 from d02_intermediate.manage_db import insert_power_data, insert_weather_data
-from d06_visualization.plots import plotly_weather
+from d06_visualization.plots import plot_weather
 
 POWER_DATA_POPULATED = True
 WEATHER_DATA_POPULATED = True
@@ -22,5 +22,3 @@ if not WEATHER_DATA_POPULATED:
 
 power_df = load_from_db(POWER_DATA)
 weather_df = load_from_db(WEATHER_DATA)
-
-plotly_weather(weather_df)
