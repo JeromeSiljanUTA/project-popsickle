@@ -1,5 +1,6 @@
 import pandas as pd
 import requests
+import logging
 
 coordinate_dictionary = {
     "North": {"Lubbock": "", "Wichita Falls": ""},
@@ -37,7 +38,7 @@ def get_weather_city():
     ):
         for city in region_dict:
             coords = region_dict[city]
-            if coords != -1:
+            if isinstance(coords, tuple):
                 response = requests.get(
                     f"https://archive-api.open-meteo.com/v1/archive?latitude={coords[0]}&longitude={coords[1]}&start_date=2002-01-01&end_date=2022-12-31&hourly=temperature_2m&timezone=America%2FChicago&temperature_unit=fahrenheit"
                 )
@@ -47,5 +48,5 @@ def get_weather_city():
                 df["City"] = city
                 data_list.append(df)
             else:
-                print(f"{city} did not get coordinates")
+                logging.warning(f"{city} did not get coordinates")
     return pd.concat(data_list)
