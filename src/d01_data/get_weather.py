@@ -32,6 +32,7 @@ def get_coordinate_dictionary():
 
 
 def get_weather_city():
+    get_coordinate_dictionary()
     data_list = []
     for region_dict, region in zip(
         coordinate_dictionary.values(), coordinate_dictionary.keys()
