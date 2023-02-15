@@ -2,12 +2,12 @@
 Moves intermediate DataFrame into SQLite3 database
 """
 
-import sqlite3
 import os
+import sqlite3
 
 CREATE_POWER_DRAW_TABLE = """
 CREATE TABLE IF NOT EXISTS power_draw(
-    "Hour Ending" TEXT,
+    "Time" TEXT,
     "COAST" TEXT,
     "EAST" TEXT,
     "FWEST" TEXT,
@@ -29,7 +29,7 @@ CREATE TABLE IF NOT EXISTS weather(
 """
 INSERT_INTO_POWER_DRAW = """
 INSERT INTO power_draw(
-    "Hour Ending",
+    "Time",
     COAST,
     EAST,
     FWEST,
