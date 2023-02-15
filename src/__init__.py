@@ -1,6 +1,7 @@
 """
 This module calls other modules to clean and display our data and predictions
 """
+import logging
 from d01_data.get_weather import get_weather_city
 from d01_data.load_data import import_files, load_from_db
 from d02_intermediate.manage_db import insert_power_data, insert_weather_data
@@ -17,8 +18,11 @@ if not POWER_DATA_POPULATED:
     insert_power_data(df)
 
 if not WEATHER_DATA_POPULATED:
-    df = get_weather_city()
-    insert_weather_data(df)
+    try:
+        df = get_weather_city()
+        insert_weather_data(df)
+    except ValueError:
+        logging.warning('Unable to retrieve any weather data')
 
 power_df = load_from_db(POWER_DATA)
 weather_df = load_from_db(WEATHER_DATA)
