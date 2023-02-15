@@ -70,8 +70,8 @@ def load_from_db(TABLE):
     with sqlite3.connect("data/02_intermediate/main.db") as conn:
         if TABLE == 1:
             df = pd.read_sql("SELECT * FROM power_draw", conn)
-            df["Hour Ending"] = pd.to_datetime(df["Hour Ending"])
         else:
             df = pd.read_sql("SELECT * FROM weather", conn)
-            df["Time"] = pd.to_datetime(df["Time"])
+
+        df["Time"] = pd.to_datetime(df["Time"])
         return df
