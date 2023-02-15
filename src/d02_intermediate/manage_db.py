@@ -22,7 +22,7 @@ CREATE TABLE IF NOT EXISTS power_draw(
 CREATE_WEATHER_TABLE = """
 CREATE TABLE IF NOT EXISTS weather(
     "Time" TEXT,
-    "Tempterature" REAL,
+    "Temperature" REAL,
     "Region" TEXT,
     "City" TEXT
 )
