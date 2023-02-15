@@ -60,7 +60,7 @@ def insert_power_data(df):
         os.mkdir("data/02_intermediate")
     with sqlite3.connect("data/02_intermediate/main.db") as conn:
         cursor = conn.cursor()
-        cursor.execute(CREATE_WEATHER_TABLE)
+        cursor.execute(CREATE_POWER_DRAW_TABLE)
         for row in df.iterrows():
             row = row[1]
             cursor.execute(
