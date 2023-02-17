@@ -74,13 +74,14 @@ def load_from_db(TABLE):
             df = pd.read_sql("SELECT * FROM weather", conn)
         df["Time"] = pd.to_datetime(df["Time"])
         cols = df.columns.to_list()
+        indices = len(cols)
         cols.remove("Time")
         try:
             cols.remove("Region")
             cols.remove("City")
-            df = df.query("COAST != 'NaT'")
         except ValueError:
-            pass
+            df = df.loc[(df["COAST"] != "NaT")]
         for column in cols:
             df[column] = df[column].astype("float")
-        return df
+            # df.loc[:, column] = df.loc[:, column].astype("float")
+    return df
