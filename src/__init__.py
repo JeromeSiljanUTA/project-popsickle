@@ -18,6 +18,8 @@ parser.add_argument(
 )
 
 args = parser.parse_args()
+
+# populates database if insert option was set
 if args.insert:
     POWER_DATA_POPULATED = False
     WEATHER_DATA_POPULATED = False
