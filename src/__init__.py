@@ -6,7 +6,8 @@ import logging
 from d01_data.get_weather import get_weather_city
 from d01_data.load_data import import_files, load_from_db
 from d02_intermediate.manage_db import insert_power_data, insert_weather_data
-from d06_visualization.plots import plot_weather
+from d03_processing.df_subset import get_subset
+from d06_visualization.plots import plot_power, plot_weather
 
 POWER_DATA_POPULATED = True
 WEATHER_DATA_POPULATED = True
