@@ -2,7 +2,6 @@
 Loads data from CSV into DataFrame
 """
 import sqlite3
-from enum import Enum
 
 import pandas as pd
 from d02_intermediate.fix_date import clean_df
