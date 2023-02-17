@@ -10,6 +10,7 @@ from d02_intermediate.manage_db import insert_power_data, insert_weather_data
 from d03_processing.df_subset import get_subset
 from d06_visualization.plots import plot_power, plot_weather
 
+# Initialize argparse parser
 parser = argparse.ArgumentParser()
 parser.add_argument(
     "--insert",
@@ -19,7 +20,10 @@ parser.add_argument(
 
 args = parser.parse_args()
 
-# populates database if insert option was set
+# Initialize logging object
+log = logging.getLogger(__name__)
+
+# Populate database if insert option was set
 if args.insert:
     POWER_DATA_POPULATED = False
     WEATHER_DATA_POPULATED = False
@@ -39,7 +43,7 @@ if not WEATHER_DATA_POPULATED:
         df = get_weather_city()
         insert_weather_data(df)
     except ValueError:
-        logging.warning("Unable to retrieve any weather data")
+        log.error("Unable to retrieve any weather data")
 
 power_df = load_from_db(POWER_DATA)
 weather_df = load_from_db(WEATHER_DATA)
