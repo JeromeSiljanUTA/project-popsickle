@@ -6,6 +6,7 @@ import logging
 import os
 import sqlite3
 
+# Make sure that numerical data is stored as "real" data type
 CREATE_POWER_DRAW_TABLE = """
 CREATE TABLE IF NOT EXISTS power_draw(
     "Time" TEXT,
@@ -21,6 +22,7 @@ CREATE TABLE IF NOT EXISTS power_draw(
     UNIQUE(Time)
 )
 """
+# Store Temperature as "real" data type
 CREATE_WEATHER_TABLE = """
 CREATE TABLE IF NOT EXISTS weather(
     "Time" TEXT,
@@ -30,6 +32,7 @@ CREATE TABLE IF NOT EXISTS weather(
     UNIQUE(Time, City)
 )
 """
+# Helper strings that make inserts easier and more clear
 INSERT_INTO_POWER_DRAW = """
 INSERT INTO power_draw(
     "Time",
@@ -58,7 +61,10 @@ def insert_power_data(df):
     """
     Adds Excel data to SQLite3 database,
     creates table if one does not already exist
+    Args:
+        df: dataframe of power data
     """
+    # Create directory if it doesn't exist
     if not os.path.isdir("data/02_intermediate"):
         os.mkdir("data/02_intermediate")
     with sqlite3.connect("data/02_intermediate/main.db") as conn:
@@ -67,7 +73,7 @@ def insert_power_data(df):
         for row in df.iterrows():
             row = row[1]
             try:
-                print(f"inserting {row} to power")
+                logging.debug(f"inserting {row} to power")
                 cursor.execute(
                     f"""
                     {INSERT_INTO_POWER_DRAW}"{row[0]}", "{row[1]}", "{row[2]}", "{row[3]}", "{row[4]}", "{row[5]}", "{row[6]}", "{row[7]}", "{row[8]}", "{row[9]}")
