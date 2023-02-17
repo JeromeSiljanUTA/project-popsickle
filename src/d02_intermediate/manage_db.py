@@ -2,6 +2,7 @@
 Moves intermediate DataFrame into SQLite3 database
 """
 
+import logging
 import os
 import sqlite3
 
