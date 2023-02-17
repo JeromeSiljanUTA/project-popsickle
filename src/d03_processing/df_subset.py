@@ -9,9 +9,18 @@ import seaborn as sns
 def get_subset(df, city=None, region=None, year=None):
     if region is not None:
         if isinstance(region, list):
-            df = df[df["Region"].isin(region)]
+            if region[0] in df.columns:
+                selection = ["Time"]
+                for region in region:
+                    selection.append(region)
+                df = df[region]
+            else:
+                df = df[df["Region"].isin(region)]
         else:
-            df = df[df["Region"] == region]
+            if region in df.columns:
+                df = df[["Time", region]]
+            else:
+                df = df[df["Region"] == region]
     if year is not None:
         if isinstance(year, list):
             df = df[df["Time"].dt.year.isin(year)]
