@@ -8,22 +8,22 @@ import sqlite3
 CREATE_POWER_DRAW_TABLE = """
 CREATE TABLE IF NOT EXISTS power_draw(
     "Time" TEXT,
-    "COAST" TEXT,
-    "EAST" TEXT,
-    "FWEST" TEXT,
-    "NORTH" TEXT,
-    "NCENT" TEXT,
-    "SOUTH" TEXT,
-    "SCENT" TEXT,
-    "WEST" TEXT,
-    "ERCOT" TEXT,
+    "COAST" REAL NOT NULL CHECK(TYPEOF("COAST") == "real"),
+    "EAST" REAL NOT NULL CHECK(TYPEOF("EAST") == "real"),
+    "FWEST" REAL NOT NULL CHECK(TYPEOF("FWEST") == "real"),
+    "NORTH" REAL NOT NULL CHECK(TYPEOF("NORTH") == "real"),
+    "NCENT" REAL NOT NULL CHECK(TYPEOF("NCENT") == "real"),
+    "SOUTH" REAL NOT NULL CHECK(TYPEOF("SOUTH") == "real"),
+    "SCENT" REAL NOT NULL CHECK(TYPEOF("SCENT") == "real"),
+    "WEST" REAL NOT NULL CHECK(TYPEOF("WEST") == "real"),
+    "ERCOT" REAL NOT NULL CHECK(TYPEOF("ERCOT") == "real"),
     UNIQUE(Time)
 )
 """
 CREATE_WEATHER_TABLE = """
 CREATE TABLE IF NOT EXISTS weather(
     "Time" TEXT,
-    "Temperature" REAL,
+    "Temperature" REAL NOT NULL CHECK(TYPEOF("Temperature") == "real"),
     "Region" TEXT,
     "City" TEXT,
     UNIQUE(Time, City)
@@ -73,12 +73,7 @@ def insert_power_data(df):
                     """
                 )
             except sqlite3.IntegrityError:
-                print(
-                    f"""Failed on:
-                    {INSERT_INTO_POWER_DRAW}"{row[0]}", "{row[1]}", "{row[2]}", "{row[3]}", "{row[4]}", "{row[5]}", "{row[6]}", "{row[7]}", "{row[8]}", "{row[9]}")
-                    """
-                )
-                pass
+                logging.warning(f"Failed to insert {row} in power_draw table")
         conn.commit()
 
 
@@ -98,5 +93,5 @@ def insert_weather_data(df):
                 )
                 print(f"inserting {row} to weather")
             except sqlite3.IntegrityError:
-                print("failed")
+                logging.warning(f"Failed to insert {row} in weather table")
         conn.commit()
