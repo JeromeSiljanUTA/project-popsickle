@@ -1,6 +1,7 @@
 """
 This module calls other modules to clean and display our data and predictions
 """
+import argparse
 import logging
 
 from d01_data.get_weather import get_weather_city
@@ -9,8 +10,20 @@ from d02_intermediate.manage_db import insert_power_data, insert_weather_data
 from d03_processing.df_subset import get_subset
 from d06_visualization.plots import plot_power, plot_weather
 
-POWER_DATA_POPULATED = True
-WEATHER_DATA_POPULATED = True
+parser = argparse.ArgumentParser()
+parser.add_argument(
+    "--insert",
+    help="insert values to database, run on the first time",
+    action="store_true",
+)
+
+args = parser.parse_args()
+if args.insert:
+    POWER_DATA_POPULATED = False
+    WEATHER_DATA_POPULATED = False
+else:
+    POWER_DATA_POPULATED = True
+    WEATHER_DATA_POPULATED = True
 
 POWER_DATA = 1
 WEATHER_DATA = 2
