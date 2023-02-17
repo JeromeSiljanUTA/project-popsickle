@@ -83,5 +83,4 @@ def load_from_db(TABLE):
             df = df.loc[(df["COAST"] != "NaT")]
         for column in cols:
             df[column] = df[column].astype("float")
-            # df.loc[:, column] = df.loc[:, column].astype("float")
     return df
