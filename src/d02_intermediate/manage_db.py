@@ -16,7 +16,8 @@ CREATE TABLE IF NOT EXISTS power_draw(
     "SOUTH" TEXT,
     "SCENT" TEXT,
     "WEST" TEXT,
-    "ERCOT" TEXT
+    "ERCOT" TEXT,
+    UNIQUE(Time)
 )
 """
 CREATE_WEATHER_TABLE = """
@@ -24,7 +25,8 @@ CREATE TABLE IF NOT EXISTS weather(
     "Time" TEXT,
     "Temperature" REAL,
     "Region" TEXT,
-    "City" TEXT
+    "City" TEXT,
+    UNIQUE(Time, City)
 )
 """
 INSERT_INTO_POWER_DRAW = """
@@ -63,11 +65,20 @@ def insert_power_data(df):
         cursor.execute(CREATE_POWER_DRAW_TABLE)
         for row in df.iterrows():
             row = row[1]
-            cursor.execute(
-                f"""
-                {INSERT_INTO_POWER_DRAW}"{row[0]}", "{row[1]}", "{row[2]}", "{row[3]}", "{row[4]}", "{row[5]}", "{row[6]}", "{row[7]}", "{row[8]}", "{row[9]}")
-                """
-            )
+            try:
+                print(f"inserting {row} to power")
+                cursor.execute(
+                    f"""
+                    {INSERT_INTO_POWER_DRAW}"{row[0]}", "{row[1]}", "{row[2]}", "{row[3]}", "{row[4]}", "{row[5]}", "{row[6]}", "{row[7]}", "{row[8]}", "{row[9]}")
+                    """
+                )
+            except sqlite3.IntegrityError:
+                print(
+                    f"""Failed on:
+                    {INSERT_INTO_POWER_DRAW}"{row[0]}", "{row[1]}", "{row[2]}", "{row[3]}", "{row[4]}", "{row[5]}", "{row[6]}", "{row[7]}", "{row[8]}", "{row[9]}")
+                    """
+                )
+                pass
         conn.commit()
 
 
@@ -79,9 +90,13 @@ def insert_weather_data(df):
         cursor.execute(CREATE_WEATHER_TABLE)
         for row in df.iterrows():
             row = row[1]
-            cursor.execute(
-                f"""
-                {INSERT_INTO_WEATHER}"{row[0]}", "{row[1]}", "{row[2]}", "{row[3]}")
-                """
-            )
+            try:
+                cursor.execute(
+                    f"""
+                    {INSERT_INTO_WEATHER}"{row[0]}", "{row[1]}", "{row[2]}", "{row[3]}")
+                    """
+                )
+                print(f"inserting {row} to weather")
+            except sqlite3.IntegrityError:
+                print("failed")
         conn.commit()
