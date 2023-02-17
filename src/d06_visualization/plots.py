@@ -1,9 +1,7 @@
 import datetime as dt
 
-import matplotlib.pyplot as plt
 import pandas as pd
 import plotly.express as px
-import seaborn as sns
 from d03_processing.df_subset import get_subset
 
 
