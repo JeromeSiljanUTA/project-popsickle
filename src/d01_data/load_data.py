@@ -72,6 +72,15 @@ def load_from_db(TABLE):
             df = pd.read_sql("SELECT * FROM power_draw", conn)
         else:
             df = pd.read_sql("SELECT * FROM weather", conn)
-
         df["Time"] = pd.to_datetime(df["Time"])
+        cols = df.columns.to_list()
+        cols.remove("Time")
+        try:
+            cols.remove("Region")
+            cols.remove("City")
+            df = df.query("COAST != 'NaT'")
+        except ValueError:
+            pass
+        for column in cols:
+            df[column] = df[column].astype("float")
         return df
