@@ -42,11 +42,11 @@ file_list = [
 
 def import_files():
     """
-    Reads list of Excel files, renames column headers,
-    and adds to DataFrame
+    Reads list of Excel files eith ERCOT weather data,
+    renames column headers, and adds to DataFrame
 
     Returns:
-        DataFrame with Excel data
+        DataFrame with ERCOT weather data
 
     """
     for idx, file_name in enumerate(file_list):
@@ -63,14 +63,17 @@ def import_files():
 def load_from_db(TABLE):
     """
     Queries SQLite3 database and populates DataFrame
+    Args:
+        TABLE:  1 if loading power_draw, 0 if loading weather
+
     Returns:
     DataFrame from SQLite3 database
-
     """
     with sqlite3.connect("data/02_intermediate/main.db") as conn:
         if TABLE == 1:
             df = pd.read_sql("SELECT * FROM power_draw", conn)
         else:
             df = pd.read_sql("SELECT * FROM weather", conn)
+        # making sure data is in datetime format
         df["Time"] = pd.to_datetime(df["Time"])
     return df
