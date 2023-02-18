@@ -39,4 +39,4 @@ From a visual inspection, it seems that while $\mu$ and $\sigma$ are constant, t
 
 This is further supported by an autocorrelation plot where we see a high autocorrelation every 24 hours.
 
-![Autocorrelation Plot](results/daily_autocorrelation.png)
+![Autocorrelation Plot](results/autocorrelation.png)
