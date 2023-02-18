@@ -26,3 +26,11 @@ The weather dataset is gathered from Open Metos's API using OpenWeatherMap's Geo
 ![ERCOT Weather Map](references/ERCOT-Maps_Weather.jpg)
 [Link](https://www.ercot.com/files/assets/2022/12/13/ERCOT-Maps_Weather.jpg?)
 
+## Testing
+### Stationarity
+Stationarity is important because other models (eg. Moving Average) rely on it. 
+
+The 3 conditions for stationarity are:
+ - $\mu$ is constant
+ - $\sigma$ is constant
+ - There is no seasonality
