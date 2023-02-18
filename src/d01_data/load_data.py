@@ -59,7 +59,7 @@ def import_files():
     return df.reset_index().drop(columns=["index"])
 
 
-def load_from_db(TABLE):
+def load_from_db(TABLE, notebook=None):
     """
     Queries SQLite3 database and populates DataFrame
     Args:
@@ -68,7 +68,10 @@ def load_from_db(TABLE):
     Returns:
     DataFrame from SQLite3 database
     """
-    with sqlite3.connect("data/02_intermediate/main.db") as conn:
+    db_path = "data/02_intermediate/main.db"
+    if notebook:
+        db_path = f"../{db_path}"
+    with sqlite3.connect(db_path) as conn:
         if TABLE == 1:
             df = pd.read_sql("SELECT * FROM power_draw", conn)
         else:
