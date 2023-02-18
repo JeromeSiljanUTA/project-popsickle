@@ -1,5 +1,5 @@
 # Project Popsickle
-Project popsickle aims to compare different time analysis techniques and assess their efficacy when forecasting power draw data. Multivariate techniques will be able to use weather in major cities as an extra predictor. 
+Project popsickle aims to compare different time analysis techniques and assess their efficacy when forecasting power draw data. Multivariate techniques will be able to use weather in major cities as an extra predictor.
 
 ## Run
 ```
@@ -8,7 +8,7 @@ make insert
 ```
 
 ## Pipeline
-There are two main datasets that this project uses: the power draw dataset and the weather dataset. 
+There are two main datasets that this project uses: the power draw dataset and the weather dataset.
 
 The power draw dataset is taken directly from ERCOT's website as Excel files. From there, it is read, concatenated, cleaned, and put into our intermediate data storage, a SQLit3 database.
 
@@ -34,3 +34,9 @@ The 3 conditions for stationarity are:
  - $\mu$ is constant
  - $\sigma$ is constant
  - There is no seasonality
+
+From a visual inspection, it seems that while $\mu$ and $\sigma$ are constant, the power data shows seasonality.
+
+This is further supported by an autocorrelation plot where we see a high autocorrelation every 24 hours.
+
+![Autocorrelation Plot](results/daily_autocorrelation.png)
