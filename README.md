@@ -3,7 +3,7 @@ Project popsickle aims to compare different time analysis techniques and assess 
 
 ## Run
 ```
-pip -r requirements.txt
+pip install -r requirements.txt
 make insert
 ```
 
