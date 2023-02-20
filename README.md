@@ -45,3 +45,11 @@ This is further supported by an autocorrelation plot where we see a high autocor
 
 When we zoom in, we can see that only a few values are considered statistically insignificant (95% confidence interval).
 ![Partial Autocorrelation Plot (Zoomed in)](results/pacf_zoom.png)
+
+#### Augmented Dickey-Fuller Test (ADF)
+```
+ADF Statistic: -12.128231738929712
+p-value: 1.7603320083622594e-22
+```
+
+Since p-value < 0.05, there is reason to reject the null hypothesis, therefore, ercot data is stationary. This is slightly confusing because there appears to be a trend.
