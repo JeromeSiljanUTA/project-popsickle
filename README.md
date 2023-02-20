@@ -46,5 +46,5 @@ Since p-value $\lt$ 0.05, there is reason to reject the null hypothesis, therefo
 [^1]: Learn more about our [Data Pipeline Structure](https://github.com/dssg/hitchhikers-guide/tree/master/sources/curriculum/0_before_you_start/pipelines-and-project-workflow)
 [^2]: This was discovered in this notebook: [ARIMA Exploration](https://github.com/JeromeSiljanUTA/project-popsickle/blob/main/notebooks/2023-02-18-jds-arima-exploration.ipynb)
 [^3]: This was discovered in this notebook: [Stationarity Testing](https://github.com/JeromeSiljanUTA/project-popsickle/blob/main/notebooks/2023-02-19-jds-stationarity-testing.ipynb)
-[^4]: [Open Meteo API] https://open-meteo.com/en/docs/historical-weather-api#latitude=32.78&longitude=-96.81&start_date=2002-01-01&end_date=2022-12-31&hourly=temperature_2m
+[^4]: [Open Meteo API](https://open-meteo.com/en/docs/historical-weather-api#latitude=32.78&longitude=-96.81&start_date=2002-01-01&end_date=2022-12-31&hourly=temperature_2m)
 [^5]: [OpenWeatherMap API](https://openweathermap.org/api/geocoding-api)
