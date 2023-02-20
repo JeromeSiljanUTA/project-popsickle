@@ -3,7 +3,7 @@ Project popsickle aims to compare different time analysis techniques and assess 
 
 ## Run
 ```
-pip -r requirements.txt
+pip install -r requirements.txt
 make insert
 ```
 
@@ -40,3 +40,8 @@ From a visual inspection, it seems that while $\mu$ and $\sigma$ are constant, t
 This is further supported by an autocorrelation plot where we see a high autocorrelation every 24 hours.
 
 ![Autocorrelation Plot](results/autocorrelation.png)
+
+![Partial Autocorrelation Plot](results/pacf.png)
+
+When we zoom in, we can see that only a few values are considered statistically insignificant (95% confidence interval).
+![Partial Autocorrelation Plot (Zoomed in)](results/pacf_zoom.png)
