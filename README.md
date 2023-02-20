@@ -55,5 +55,5 @@ p-value: 1.7603320083622594e-22
 Since p-value $\lt$ 0.05, there is reason to reject the null hypothesis, therefore, ercot data is stationary. This is slightly confusing because there appears to be a trend.[^2]
 
 ## Footnotes
-[^1]: This was discovered in this notebook: [ARIMA Exploration](notebooks/2023-02-18-jds-arima-exploration.ipynb)
-[^2]: This was discovered in this notebook: [Stationarity Testing](notebooks/2023-02-19-jds-stationarity-testing.ipynb)
+[^1]: This was discovered in this notebook: [ARIMA Exploration](https://github.com/JeromeSiljanUTA/project-popsickle/blob/main/notebooks/2023-02-18-jds-arima-exploration.ipynb)
+[^2]: This was discovered in this notebook: [Stationarity Testing](https://github.com/JeromeSiljanUTA/project-popsickle/blob/main/notebooks/2023-02-19-jds-stationarity-testing.ipynb)
