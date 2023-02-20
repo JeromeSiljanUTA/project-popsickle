@@ -39,12 +39,12 @@ From a visual inspection, it seems that while $\mu$ and $\sigma$ are constant, t
 
 This is further supported by an autocorrelation plot where we see a high autocorrelation every 24 hours.
 
-![Autocorrelation Plot](results/autocorrelation.png)
+![Autocorrelation Plot](results/autocorrelation.png)[^1]
 
-![Partial Autocorrelation Plot](results/pacf.png)
+![Partial Autocorrelation Plot](results/pacf.png)[^1]
 
 When we zoom in, we can see that only a few values are considered statistically insignificant (95% confidence interval).
-![Partial Autocorrelation Plot (Zoomed in)](results/pacf_zoom.png)
+![Partial Autocorrelation Plot (Zoomed in)](results/pacf_zoom.png)[^1]
 
 #### Augmented Dickey-Fuller Test (ADF)
 ```
@@ -52,4 +52,8 @@ ADF Statistic: -12.128231738929712
 p-value: 1.7603320083622594e-22
 ```
 
-Since p-value < 0.05, there is reason to reject the null hypothesis, therefore, ercot data is stationary. This is slightly confusing because there appears to be a trend.
+Since p-value $\lt$ 0.05, there is reason to reject the null hypothesis, therefore, ercot data is stationary. This is slightly confusing because there appears to be a trend.[^2]
+
+## Footnotes
+[^1]: This was discovered in this notebook: [ARIMA Exploration](notebooks/2023-02-18-jds-arima-exploration.ipynb)
+[^2]: This was discovered in this notebook: [Stationarity Testing](notebooks/2023-02-19-jds-stationarity-testing.ipynb)
