@@ -53,6 +53,7 @@ weather_df = load_from_db(WEATHER_DATA)
 
 def train_arimas():
     orders = [(24, 0, 1), (24, 1, 1)]
+    threaded_arima(power_df, orders)
 
 
 def train_sarimax():
