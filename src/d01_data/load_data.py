@@ -78,4 +78,6 @@ def load_from_db(TABLE, notebook=None):
             df = pd.read_sql("SELECT * FROM weather", conn)
         # making sure data is in datetime format
         df["Time"] = pd.to_datetime(df["Time"])
-    return df
+        df.set_index("Time", inplace=True)
+        df = df.groupby(pd.Grouper(freq="1D")).sum()
+    return df["ERCOT"]
