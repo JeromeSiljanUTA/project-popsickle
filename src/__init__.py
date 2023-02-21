@@ -48,15 +48,3 @@ if not WEATHER_DATA_POPULATED:
         log.error("Unable to retrieve any weather data")
 
 power_df = load_from_db(POWER_DATA)
-weather_df = load_from_db(WEATHER_DATA)
-
-
-def train_arimas():
-    orders = [(24, 0, 1), (24, 1, 1)]
-    threaded_arima(power_df, orders)
-
-
-def train_sarimax():
-    seasonal_order = (4, 0, 1, 24)
-    order = (0, 1, 0)
-    fit_sarimax(power_df, seasonal_order, order)
