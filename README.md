@@ -10,9 +10,9 @@ make insert
 ## Pipeline [^1]
 There are two main datasets that this project uses: the power draw dataset and the weather dataset.
 
-The power draw dataset is taken directly from ERCOT's website as Excel files. From there, it is read, concatenated, cleaned, and put into our intermediate data storage, a SQLit3 database.
+The power draw dataset is taken directly from ERCOT's website as Excel files. From there, it is read, concatenated, cleaned, and put into our intermediate data storage, a SQLite3 database.
 
-The weather dataset is gathered from Open Metos's API[^4] using OpenWeatherMap's Geocoding API[^5]. From there, it undergoes a process similar to the power draw data, and is put into our intermediate data storage, a SQLit3 database.
+The weather dataset is gathered from Open Metos's API[^4] using OpenWeatherMap's Geocoding API[^5]. From there, it undergoes a process similar to the power draw data, and is put into our intermediate data storage, a SQLite3 database.
 
 ## Testing
 ### Stationarity
